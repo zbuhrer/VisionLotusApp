@@ -1,13 +1,23 @@
 import flet as ft
 
-class ConventionApp(ft.UserControl):
+class VisionLotus(ft.UserControl):
     def __init__(self):
+        
         self.appbar = ft.AppBar(
-            leading=ft.Icon(ft.icons.ARROW_BACK),
+            leading=ft.PopupMenuButton(icon=ft.icons.HOME_OUTLINED,items=[
+                ft.PopupMenuItem(text="Auction Information",on_click=self.show_auction_info),
+                ft.PopupMenuItem(text="Class Schedule",on_click=self.show_class_schedules)
+                ]),
             title=ft.Text("Vision Lotus", style=ft.TextStyle(color=ft.colors.RED)),
             center_title=False,
             bgcolor=ft.colors.BLACK,
-            )
+            actions=[
+                ft.PopupMenuButton(icon=ft.icons.MENU,items=[
+                ft.PopupMenuItem(text="Presenter Application"),
+                ft.PopupMenuItem(text="Volunteer Application"),
+                ft.PopupMenuItem(text="Sponsorship Application"),
+                ft.PopupMenuItem(text="Vendor Application"),])])
+            
     def show_auction_info(self, e):
         print("Auction information page opened!")
 
@@ -24,7 +34,7 @@ class ConventionApp(ft.UserControl):
         print("Special guests and speakers page opened!")
 
 def main(page: ft.Page) -> None:
-    app = ConventionApp()
+    app = VisionLotus()
     page.appbar = app.appbar
     page.add(ft.Text("Vision Lotus!", style=ft.TextStyle(color=ft.colors.RED)))
 
