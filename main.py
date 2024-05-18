@@ -1,6 +1,6 @@
-from turtle import onclick
 import flet as ft
 
+from ui.pages import EventSchedulePage as ESP
 
 def main(page: ft.Page) -> None:
     def __init__():
@@ -12,8 +12,9 @@ def main(page: ft.Page) -> None:
 
     def show_event_schedules(self):
         print("Event schedules page opened!")
-        
-        appbody.controls=[ft.Text(value="Event Schedule Placeholder")]
+        self.ESP = ESP()
+        self.ESP.loadpage()
+        appbody.controls=[self.ESP]
         page.update()
         
         return 
@@ -33,15 +34,18 @@ def main(page: ft.Page) -> None:
     
     appbar = ft.AppBar(
         leading=ft.IconButton(icon=ft.icons.HOME_OUTLINED, on_click=main.__init__()),
-        title=ft.Text("Vision Lotus"),
+        title=ft.Text(value="Vision Lotus",color=ft.colors.RED_400),
         center_title=False,
         bgcolor=ft.colors.BLACK,
         actions=[
-            ft.PopupMenuButton(icon=ft.icons.MENU,items=[
+            ft.PopupMenuButton(icon=ft.icons.MENU,
+                               bgcolor=ft.colors.GREY_800,
+                               items=[
             ft.PopupMenuItem(text="Presenter Application"),
             ft.PopupMenuItem(text="Volunteer Application"),
             ft.PopupMenuItem(text="Sponsorship Application"),
             ft.PopupMenuItem(text="Vendor Application"),
+            ft.PopupMenuItem(),
             ft.PopupMenuItem(text="Event Schedule",on_click=show_event_schedules),
             ft.PopupMenuItem(text="Map"),
             ft.PopupMenuItem(text="Auction Information",on_click=show_auction_info),
