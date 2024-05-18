@@ -1,34 +1,39 @@
+from turtle import onclick
 import flet as ft
 
 
 def main(page: ft.Page) -> None:
+    def __init__():
+        page.update()
+        
+
     def show_auction_info(self, e):
         print("Auction information page opened!")
 
     def show_event_schedules(self):
         print("Event schedules page opened!")
         
-        appbody.value="Event schedules page placeholder."
+        appbody.controls=[ft.Text(value="Event Schedule Placeholder")]
         page.update()
         
         return 
-
-    def show_food_truck_schedule(self, e):
-        print("Food truck schedule page opened!")
 
     def show_maps_to_event(self, e):
         print("Maps to the event page opened!")
 
     def show_special_guests_and_speakers(self, e):
+        # this is pseudocode, you'll know what I mean:
+        # from ui.specialguests import List as L
+        # self.guestlist = L()
+        # appbody.controls = [self.guestlist]
+
+        
         print("Special guests and speakers page opened!")
 
+    
     appbar = ft.AppBar(
-        leading=ft.PopupMenuButton(icon=ft.icons.HOME_OUTLINED,items=[
-            ft.PopupMenuItem(text="Event Schedule",on_click=show_event_schedules),
-            ft.PopupMenuItem(text="Map"),
-            ft.PopupMenuItem(text="Auction Information",on_click=show_auction_info),
-            ]),
-        title=ft.Text("Vision Lotus", style=ft.TextStyle(color=ft.colors.RED)),
+        leading=ft.IconButton(icon=ft.icons.HOME_OUTLINED, on_click=main.__init__()),
+        title=ft.Text("Vision Lotus"),
         center_title=False,
         bgcolor=ft.colors.BLACK,
         actions=[
@@ -36,12 +41,25 @@ def main(page: ft.Page) -> None:
             ft.PopupMenuItem(text="Presenter Application"),
             ft.PopupMenuItem(text="Volunteer Application"),
             ft.PopupMenuItem(text="Sponsorship Application"),
-            ft.PopupMenuItem(text="Vendor Application"),])])
+            ft.PopupMenuItem(text="Vendor Application"),
+            ft.PopupMenuItem(text="Event Schedule",on_click=show_event_schedules),
+            ft.PopupMenuItem(text="Map"),
+            ft.PopupMenuItem(text="Auction Information",on_click=show_auction_info),
+            ])])
     
-    appbody = ft.Text(value="Vision Home Page Placeholder")
+    appbody = ft.Column(controls=[
+        ft.Text(value="Vision Home Page Placeholder")
+    ])
  
 
 
+    page.theme = ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary=ft.colors.BLUE,
+            secondary=ft.colors.GREY,
+        ),
+        font_family="Open Sans"
+    )
     page.appbar = appbar
     page.add(appbody)
 
